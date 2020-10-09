@@ -52,6 +52,30 @@ atomic_mass <-
 
 # define isotope properties -----------------------------------------------
 
+iso_info <-
+  list(
+    C = list(number = 2,
+             isotope = c("C12", "C13"),
+             mass = c(12, 13.003355),
+             abundance = c(0.9893, 0.0107),
+             shift = c(0, 1)),
+    H = list(number = 2,
+             isotope = c("H1", "H2"),
+             masse = c(1.007825, 2.014102),
+             abundance = c(0.999885, 0.00115),
+             shift = c(0, 1)),
+    O = list(number = 3,
+             isotope = c("O16", "017", "O18"),
+             mass = c(15.994915, 16.999132, 17.999160),
+             abundance = c(0.99757, 0.00038, 0.00205),
+             shift = c(0, 1, 2)),
+    N = list(number = 2,
+             isotope = c("N14", "N15"),
+             mass = c(14.003074, 15.000109),
+             abundance = c(0.99632, 0.00368),
+             shift = c(0, 1))
+  )
+
 # isotope_properties <-
 #   tibble::tribble(
 #     ~element, ~mass, ~abundance, ~M,
@@ -89,6 +113,7 @@ atomic_mass <-
 
 usethis::use_data(
   atomic_mass,
+  iso_info,
   # isotope_properties,
   # isotope_table,
   internal = TRUE,
