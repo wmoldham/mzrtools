@@ -24,3 +24,8 @@ Suggests:
     spelling,
     testthat
 Language: en-US
+Imports: 
+    stringr,
+    magrittr
+Depends: 
+    R (>= 2.10)
