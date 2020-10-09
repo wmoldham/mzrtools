@@ -26,8 +26,8 @@ mz_atomize <- function(mol) {
   }
 
   atom_count <- "(([A-Z]{1}[a-z]?)|(\\+|\\-))[0-9]*"
-  atom <- stringr::str_extract_all(mol, pattern = atom_count, simplify = TRUE)
-  element <- stringr::str_extract(atoms, "\\D*")
+  atoms <- stringr::str_extract_all(mol, pattern = atom_count, simplify = TRUE)
+  elements <- stringr::str_extract(atoms, "\\D*")
 
   # verify elements
   if(sum(elements %nin% names(atomic_mass)) > 0) {
@@ -45,12 +45,12 @@ mz_atomize <- function(mol) {
                         ") used in supplied formula."))
   }
 
-  count <-
+  counts <-
     stringr::str_extract(atoms, "\\d+") %>%
     replace(is.na(.), "1") %>%
     as.integer()
 
-  as.list(count) %>%
-    rlang::set_names(element)
+  as.list(counts) %>%
+    rlang::set_names(elements)
 
 }
