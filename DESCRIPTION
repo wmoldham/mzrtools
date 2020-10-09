@@ -1,5 +1,5 @@
 Package: mzrtools.dev
-Title: What the Package Does (One Line, Title Case)
+Title: Make Molecular Formulas Useful for Mass Spectrometry Applications
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "William",
@@ -7,7 +7,12 @@ Authors@R:
            role = c("aut", "cre"),
            email = "wm.oldham@gmail.com",
            comment = c(ORCID = "0000-0003-3029-4866"))
-Description: What the package does (one paragraph).
+Description: Several tools that convert molecular formulas into useful values 
+    for mass spectrometry applications. This includes parsing formulas, 
+    calculating monoisotopic masses, and building chemical libraries for 
+    targeted mass spectrometry applications. In addition, functions will 
+    enumerate chemical isotopes, calculate the isotopic probability 
+    distributions, and perform correction for natural isotope abundance. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
