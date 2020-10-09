@@ -1,3 +1,22 @@
+#' Parse a molecular formula into element and count
+#'
+#' \code{mz_atomize} separates a molecular formula into element and count,
+#'     returning a names list of element counts.
+#'
+#' @param mol A string containing a molecular formula
+#'     (\emph{e.g.}, "C2H7NO3S"). Structural formulas containing parentheses are
+#'     not acceptable. Charges may be included, but the charge count should follow
+#'     the sign (\emph{e.g.}, "C10H16N5O13P3-3").
+#'
+#' @return A named list of element counts.
+#'
+#' @export
+#'
+#' @examples
+#' mz_atomize("C5H8O5-")
+#' mz_atomize("C2H7NO3S")
+#' mz_atomize("C10H16N5O13P3-3")
+#'
 mz_atomize <- function(mol) {
 
   # check arguments
@@ -7,37 +26,31 @@ mz_atomize <- function(mol) {
   }
 
   atom_count <- "(([A-Z]{1}[a-z]?)|(\\+|\\-))[0-9]*"
-  parsed <-
-    stringr::str_extract_all(mol,
-                             pattern = atom_count,
-                             simplify = TRUE) %>%
-    stringr::str_split_fixed(pattern = "(?<=\\D)(?=\\d)", n = 2) %>%
-    magrittr::set_colnames(c("element", "count")) %>%
-    tibble::as_tibble() %>%
-    dplyr::mutate(count = replace(.data$count, .data$count == "", 1),
-                  count = as.double(.data$count))
+  atoms <- stringr::str_extract_all(mol, pattern = atom_count, simplify = TRUE)
+  elements <- stringr::str_extract(atoms, "\\D*")
 
-  if (sum(!(parsed$element %in% c(names(atomic_mass), "+", "-"))) > 0) {
-    z <- parsed$element[!(parsed$element %in% c(names(atomic_mass)))]
+  # verify elements
+  if(sum(elements %nin% names(atomic_mass)) > 0) {
+    errs <- elements[elements %nin% names(atomic_mass)]
     stop(stringr::str_c("Unknown element(s) (",
-                        stringr::str_c(z, collapse = ", "),
+                        stringr::str_c(errs, collapse = ", "),
                         ") used in supplied formula."))
   }
 
-  if (sum(duplicated(parsed$element)) > 0) {
-    z <- parsed$element[duplicated(parsed$element)]
+  # check for duplicates
+  if (sum(duplicated(elements)) > 0) {
+    errs <- unique(elements[duplicated(elements)])
     stop(stringr::str_c("Duplicated element(s) (",
                         stringr::str_c(z, collapse = ", "),
                         ") used in supplied formula."))
   }
 
-  if (sum(parsed$count == 0) > 0) {
-    z <- parsed$element[parsed$count == 0]
-    stop(stringr::str_c("Element(s) (",
-                        stringr::str_c(z, collapse = ", "),
-                        ") provided count of 0."))
-  }
+  counts <-
+    stringr::str_extract(atoms, "\\d+") %>%
+    replace(is.na(.), "1") %>%
+    as.integer()
 
-  parsed
+  as.list(counts) %>%
+    rlang::set_names(elements)
 
 }
