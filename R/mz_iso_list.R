@@ -20,14 +20,15 @@ mz_iso_list <- function(mol) {
 
   if (length(isotopes) == 0) return(NA)
 
-  iso_names <- lapply(iso_info[names(isotopes)], '[[', "isotope")
+  iso_names <- lapply(iso_info[names(isotopes)], "[[", "isotope")
 
   matrices <-
-    purrr::pmap(.l = list(isotopes,
-                          lapply(iso_info[names(isotopes)], '[[', "number")),
+    purrr::pmap(.l = list(lapply(iso_info[names(isotopes)], "[[", "number"),
+                          isotopes,
+                          iso_names),
                 .f = gtools::combinations,
                 repeats.allowed = TRUE) %>%
-    purrr::map2(., iso_names, magrittr::set_colnames)
+    purrr::map2(iso_names, summarize_combos)
 
 
   if (length(matrices) == 1) {
@@ -43,6 +44,12 @@ mz_iso_list <- function(mol) {
 
   CHONS
 
+}
+
+summarize_combos <- function(combo_matrix, isotope_names) {
+  purrr::map_dfc(isotope_names, ~rowSums(combo_matrix == .x)) %>%
+    stats::setNames(isotope_names) %>%
+    as.matrix()
 }
 
 assemble_matrices <- function(matrix_a, matrix_b) {
