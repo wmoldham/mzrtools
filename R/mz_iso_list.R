@@ -22,13 +22,15 @@ mz_iso_list <- function(mol) {
 
   iso_names <- lapply(iso_info[names(isotopes)], "[[", "isotope")
 
-  matrices <-
-    purrr::pmap(.l = list(lapply(iso_info[names(isotopes)], "[[", "number"),
-                          isotopes,
-                          iso_names),
-                .f = gtools::combinations,
-                repeats.allowed = TRUE) %>%
-    purrr::map2(iso_names, summarize_combos)
+  suppressMessages(
+    matrices <-
+      purrr::pmap(.l = list(lapply(iso_info[names(isotopes)], "[[", "number"),
+                            isotopes,
+                            iso_names),
+                  .f = gtools::combinations,
+                  repeats.allowed = TRUE) %>%
+      purrr::map2(iso_names, summarize_combos)
+  )
 
 
   if (length(matrices) == 1) {
