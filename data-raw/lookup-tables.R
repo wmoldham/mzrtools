@@ -65,7 +65,7 @@ iso_info <-
              abundance = c(0.999885, 0.00115),
              shift = c(0, 1)),
     O = list(number = 3,
-             isotope = c("O16", "017", "O18"),
+             isotope = c("O16", "O17", "O18"),
              mass = c(15.994915, 16.999132, 17.999160),
              abundance = c(0.99757, 0.00038, 0.00205),
              shift = c(0, 1, 2)),
