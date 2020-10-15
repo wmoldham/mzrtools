@@ -17,7 +17,8 @@ returns the monoisotopic mass; "positive", which returns the [M+H]+ mass;
 or "negative", which returns the [M-H]- mass.}
 }
 \value{
-A tibble of isotope information
+A list containing a tibble of annotated isotope information, the
+parsed molecular formula, and the isotopes present in the molecule.
 }
 \description{
 \code{mz_iso_annotate} generates a tibble enumerating all possible isotopes of

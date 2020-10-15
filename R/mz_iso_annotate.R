@@ -7,7 +7,8 @@
 #' @inheritParams mz_atomize
 #' @inheritParams mz_calculate
 #'
-#' @return A tibble of isotope information
+#' @return A list containing a tibble of annotated isotope information, the
+#'     parsed molecular formula, and the isotopes present in the molecule.
 #'
 #' @export
 #'
@@ -46,8 +47,11 @@ mz_iso_annotate <- function(mol, pol = "negative") {
   iso_mass <- c(annot("mass", iso_list) + unlabeled_mass)
   iso_shift <- c(annot("shift", iso_list))
 
-  tibble::as_tibble(iso_list) %>%
+  iso_list <-
+    tibble::as_tibble(iso_list) %>%
     dplyr::bind_cols(mass = iso_mass, shift = iso_shift) %>%
     dplyr::arrange(mass)
+
+  list(iso_list = iso_list, elements = elements, isotopes = isotopes)
 
 }
