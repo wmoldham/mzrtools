@@ -2,5 +2,6 @@
 
 export(mz_atomize)
 export(mz_calculate)
+export(mz_iso_annotate)
 export(mz_iso_list)
 importFrom(magrittr,"%>%")
