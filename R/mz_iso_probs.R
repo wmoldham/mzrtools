@@ -66,7 +66,7 @@ mz_iso_probs <- function(mol,
   choices <- do.call(cbind, molecule_m)
   names(choices) <- stringr::str_extract(names(choices), "[A-Z][a-z]?\\d+$")
 
-  if (ncol(combos == 1)) {
+  if (ncol(combos) == 1) {
     out <- choices
   } else {
     out <- apply(combos, 1, function(x) {
@@ -75,5 +75,5 @@ mz_iso_probs <- function(mol,
     })
     colnames(out) <- apply(combos, 1, paste, collapse = ".")
   }
-  solve(out)
+  out
 }
