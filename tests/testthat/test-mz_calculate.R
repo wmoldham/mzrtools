@@ -9,6 +9,6 @@ test_that("polarity works", {
 })
 
 test_that("math is correct", {
-  expect_equal(mz_calculate("C3H4N2Si3"), 151.9682, tolerance = 1e-7)
+  expect_equal(mz_calculate("C3H4N2Si3"), 151.9682, tolerance = 1e-6)
 })
 
