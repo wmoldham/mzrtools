@@ -4,6 +4,7 @@ test_that("molecular formula is correct", {
 })
 
 test_that("output is correct", {
-  expect_equal(mz_atomize("C14"), list(C = 14))
-  expect_equal(mz_atomize("C"), list(C = 1))
+  expect_vector(mz_atomize("C14"))
+  expect_named(mz_atomize("C14"), "C")
+  expect_equal(mz_atomize("C"), 1 %>% rlang::set_names("C"))
 })

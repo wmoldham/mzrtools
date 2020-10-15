@@ -13,7 +13,7 @@ not acceptable. Charges may be included, but the charge count should follow
 the sign (\emph{e.g.}, "C10H16N5O13P3-3").}
 }
 \value{
-A named list of element counts.
+A named vector of element counts.
 }
 \description{
 \code{mz_atomize} separates a molecular formula into element and count,

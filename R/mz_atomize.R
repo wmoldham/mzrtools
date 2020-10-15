@@ -8,7 +8,7 @@
 #'     not acceptable. Charges may be included, but the charge count should follow
 #'     the sign (\emph{e.g.}, "C10H16N5O13P3-3").
 #'
-#' @return A named list of element counts.
+#' @return A named vector of element counts.
 #'
 #' @export
 #'
@@ -50,7 +50,6 @@ mz_atomize <- function(mol) {
     replace(is.na(.), "1") %>%
     as.integer()
 
-  as.list(counts) %>%
-    rlang::set_names(elements)
-
+  names(counts) <- elements
+  counts
 }
