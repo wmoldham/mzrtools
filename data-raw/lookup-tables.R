@@ -63,7 +63,7 @@ iso_info <-
     H = list(number = 2,
              isotope = c("H1", "H2"),
              label = c("H2"),
-             masse = c(1.007825, 2.014102),
+             mass = c(1.007825, 2.014102),
              abundance = c(0.999885, 0.00115),
              shift = c(0, 1)),
     O = list(number = 3,
