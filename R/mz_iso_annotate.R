@@ -53,6 +53,9 @@ mz_iso_annotate <- function(mol, pol = "negative") {
     dplyr::select(.data$shift, .data$mass, dplyr::everything()) %>%
     dplyr::arrange(mass)
 
-  list(elements = elements, isotopes = isotopes, iso_list = iso_list)
+  list(elements = elements,
+       isotopes = isotopes,
+       polarity = pol,
+       iso_list = iso_list)
 
 }

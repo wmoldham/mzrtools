@@ -24,8 +24,6 @@ mz_iso_target <- function(mol, tracer, pol = "negative", ...) {
 
   labels <- unlist(lapply(iso_info[tracer], "[[", "label"))
 
-  ## TODO: Account for increased mass shift with oxygen (and other) labels ##
-
   shifts <- matrix(nrow = length(labels), ncol = 1, dimnames = list(labels, NA))
   for (nm in names(labels)) {
     idx <- which(iso_info[[nm]]$isotope == labels[[nm]])
@@ -42,9 +40,9 @@ mz_iso_target <- function(mol, tracer, pol = "negative", ...) {
     dplyr::arrange(.data$mass) %>%
     dplyr::select(.data$mass, .data$shift, dplyr::everything())
 
-  list(elements = l$elements,
-       isotopes = l$isotopes,
-       iso_list = iso_list,
-       targets = targets)
+  l[["tracer"]] <- tracer
+  l[["targets"]] <- targets
+
+  l
 
 }

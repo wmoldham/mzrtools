@@ -1,3 +1,24 @@
+#' Calculate isotope abundances
+#'
+#' \code{mz_iso_quant} will calculate the probability matrix.
+#'
+#' @param isotope_matrix Matrix output of \code{mz_iso_tally}.
+#' @param m Mass shift from the incorporation of a labed isotope.
+#' @param lab Character vector of labed element.
+#'
+#' @return Vector of probabilities with length equal to the number of isotopes.
+#'
+#' @export
+#'
+#' @examples
+#' z <- mz_iso_list("C3")
+#'
+#' ## Calculate the natural abundance.
+#' mz_iso_calc_probs(z)
+#'
+#' ## Calculate the natural abundance assuming one labled carbon.
+#' mz_iso_calc_probs(z, lab = "C", m = 1)
+#'
 mz_iso_quant <- function(mol,
                          pol = "negative",
                          tracer,
@@ -80,11 +101,8 @@ mz_iso_quant <- function(mol,
 
   prob_matrix <- rowsum(out, group = l$resolved[["mass"]], reorder = FALSE)
 
-  list(elements = l$elements,
-       isotopes = l$isotopes,
-       iso_list = l$iso_list,
-       targets = l$targets,
-       resolved = l$resolved,
-       prob_matrix = prob_matrix)
+  l[["prob_matrix"]] <- prob_matrix
+
+  l
 
 }

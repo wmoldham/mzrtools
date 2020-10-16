@@ -32,11 +32,9 @@ mz_iso_resolve <- function(mol, tracer, pol = "negative", ...) {
     dplyr::select(-c(.data$mass.iso, .data$diff, .data$delta)) %>%
     dplyr::rename(mass = .data$mass.tar)
 
-  list(elements = l$elements,
-       isotopes = l$isotopes,
-       iso_list = iso_list,
-       targets = targets,
-       resolved = resolved)
+  l[["resolved"]] <- resolved
+
+  l
 
 }
 
