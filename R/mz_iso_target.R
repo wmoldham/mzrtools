@@ -30,7 +30,7 @@ mz_iso_target <- function(mol, tracer, pol = "negative", ...) {
   targets <-
     dplyr::slice(iso, target_isos) %>%
     dplyr::group_by(.data$shift) %>%
-    dplyr::mutate(group = assign_groups(.data$mass, ...))
+    dplyr::mutate(group = assign_groups(.data$mass, ...)) %>%
     # dplyr::mutate(group = assign_groups(.data$mass)) %>%
     dplyr::group_by(.data$shift, .data$group) %>%
     dplyr::summarise(mass = mean(.data$mass)) %>%
