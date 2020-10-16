@@ -24,7 +24,17 @@ mz_iso_target <- function(mol, tracer, pol = "negative", ...) {
 
   labels <- unlist(lapply(iso_info[tracer], "[[", "label"))
 
-  target_isos <- which(rowSums(iso_list[, labels, drop = FALSE]) == iso_list[, "shift"])
+  ## TODO: Account for increased mass shift with oxygen (and other) labels ##
+
+  shifts <- matrix(nrow = length(labels), ncol = 1, dimnames = list(labels, NA))
+  for (nm in names(labels)) {
+    idx <- which(iso_info[[nm]]$isotope == labels[[nm]])
+    shifts[labels[[nm]], ] <- iso_info[[nm]]$shift[[idx]]
+  }
+
+  iso_shifts <- as.matrix(iso_list[, labels, drop = FALSE]) %*% shifts
+
+  target_isos <- which(iso_shifts == iso_list[, "shift"])
 
   # format output and combine unresolved masses
   targets <-
