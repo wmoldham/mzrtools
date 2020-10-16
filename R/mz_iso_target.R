@@ -20,17 +20,21 @@ mz_iso_target <- function(mol, tracer, pol = "negative", ...) {
 
   l <- mz_iso_annotate(mol, pol)
 
-  iso <- l$iso_list
+  iso_list <- l$iso_list
 
   labels <- unlist(lapply(iso_info[tracer], "[[", "label"))
 
-  target_isos <- which(rowSums(iso[, labels, drop = FALSE]) == iso[, "shift"])
+  target_isos <- which(rowSums(iso_list[, labels, drop = FALSE]) == iso_list[, "shift"])
 
   # format output and combine unresolved masses
   targets <-
-    dplyr::slice(iso, target_isos) %>%
-    dplyr::arrange(.data$mass)
+    dplyr::slice(iso_list, target_isos) %>%
+    dplyr::arrange(.data$mass) %>%
+    dplyr::select(.data$mass, .data$shift, dplyr::everything())
 
-  list(targets = targets, annot = l)
+  list(elements = l$elements,
+       isotopes = l$isotopes,
+       iso_list = iso_list,
+       targets = targets)
 
 }

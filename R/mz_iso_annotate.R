@@ -50,8 +50,9 @@ mz_iso_annotate <- function(mol, pol = "negative") {
   iso_list <-
     tibble::as_tibble(iso_list) %>%
     dplyr::bind_cols(mass = iso_mass, shift = iso_shift) %>%
+    dplyr::select(.data$shift, .data$mass, dplyr::everything()) %>%
     dplyr::arrange(mass)
 
-  list(iso_list = iso_list, elements = elements, isotopes = isotopes)
+  list(elements = elements, isotopes = isotopes, iso_list = iso_list)
 
 }

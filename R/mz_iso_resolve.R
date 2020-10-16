@@ -17,17 +17,34 @@
 #'
 mz_iso_resolve <- function(mol, tracer, pol = "negative", ...) {
 
-  l <- mz_iso_target(mol = mol, tracer = tracer, pol = pol)
-  # l <- mz_iso_target(mol = mol, tracer = tracer, pol = pol, ...)
-  iso <- l$annot$iso_list
+  # l <- mz_iso_target(mol = mol, tracer = tracer, pol = pol)
+  l <- mz_iso_target(mol = mol, tracer = tracer, pol = pol, ...)
+  iso_list <- l$iso_list
   targets <- l$targets
 
-  targets %>%
-    dplyr::left_join(iso, by = "shift", suffix = c(".tar", ".iso")) %>%
+  resolved <-
+    targets %>%
+    dplyr::select(.data$shift, .data$mass) %>%
+    dplyr::left_join(iso_list, by = "shift", suffix = c(".tar", ".iso")) %>%
     dplyr::mutate(diff = abs(.data$mass.tar - .data$mass.iso),
-                  delta = delta_mz(.data$mass.tar)) %>%
-    dplyr::filter(.data$diff < .data$delta) %>%
+                  delta = delta_mz(.data$mass.tar, ...)) %>%
+    dplyr::filter(.data$diff <= .data$delta) %>%
     dplyr::select(-c(.data$mass.iso, .data$diff, .data$delta)) %>%
     dplyr::rename(mass = .data$mass.tar)
 
+  list(elements = l$elements,
+       isotopes = l$isotopes,
+       iso_list = iso_list,
+       targets = targets,
+       resolved = resolved)
+
 }
+
+
+# based on Orbitrap detector
+delta_mz <-
+  function(mz,
+           nominal_mz = 200,
+           nominal_resolution = 70000) {
+    1.67 * mz * sqrt(mz / nominal_mz) / nominal_resolution
+  }
