@@ -29,37 +29,8 @@ mz_iso_target <- function(mol, tracer, pol = "negative", ...) {
   # format output and combine unresolved masses
   targets <-
     dplyr::slice(iso, target_isos) %>%
-    dplyr::group_by(.data$shift) %>%
-    dplyr::mutate(group = assign_groups(.data$mass, ...)) %>%
-    # dplyr::mutate(group = assign_groups(.data$mass)) %>%
-    dplyr::group_by(.data$shift, .data$group) %>%
-    dplyr::summarise(mass = mean(.data$mass)) %>%
-    dplyr::ungroup()
+    dplyr::arrange(.data$mass)
 
   list(targets = targets, annot = l)
 
-}
-
-
-# based on Orbitrap detector
-delta_mz <-
-  function(mz,
-           nominal_mz = 200,
-           nominal_resolution = 70000) {
-    1.67 * mz * sqrt(mz / nominal_mz) / nominal_resolution
-  }
-
-
-assign_groups <- function(masses, ...) {
-  if (length(masses) == 1) {
-    "A"
-  } else if (max(masses) - min(masses) < delta_mz(mean(masses), ...)) {
-    "A"
-  } else {
-    groups <-
-      dist(masses) %>%
-      hclust() %>%
-      cutree(h = delta_mz(mean(masses, na.rm = TRUE), ...))
-    LETTERS[groups]
-  }
 }
