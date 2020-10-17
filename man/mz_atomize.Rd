@@ -7,17 +7,17 @@
 mz_atomize(mol)
 }
 \arguments{
-\item{mol}{A string containing a molecular formula
-(\emph{e.g.}, "C2H7NO3S"). Structural formulas containing parentheses are
-not acceptable. Charges may be included, but the charge count should follow
-the sign (\emph{e.g.}, "C10H16N5O13P3-3").}
+\item{mol}{A string containing a molecular formula (\emph{e.g.}, "C2H7NO3S").
+Structural formulas containing parentheses are not acceptable. Charges
+may be included, but the charge count should follow the sign (\emph{e.g.},
+"C10H16N5O13P3-3").}
 }
 \value{
-A named vector of element counts.
+A vector of counts named by element.
 }
 \description{
 \code{mz_atomize} separates a molecular formula into element and count,
-returning a names list of element counts.
+returning a named vector of element counts.
 }
 \examples{
 mz_atomize("C5H8O5-")

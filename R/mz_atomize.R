@@ -1,14 +1,14 @@
 #' Parse a molecular formula into element and count
 #'
 #' \code{mz_atomize} separates a molecular formula into element and count,
-#'     returning a names list of element counts.
+#'     returning a named vector of element counts.
 #'
-#' @param mol A string containing a molecular formula
-#'     (\emph{e.g.}, "C2H7NO3S"). Structural formulas containing parentheses are
-#'     not acceptable. Charges may be included, but the charge count should follow
-#'     the sign (\emph{e.g.}, "C10H16N5O13P3-3").
+#' @param mol A string containing a molecular formula (\emph{e.g.}, "C2H7NO3S").
+#'     Structural formulas containing parentheses are not acceptable. Charges
+#'     may be included, but the charge count should follow the sign (\emph{e.g.},
+#'     "C10H16N5O13P3-3").
 #'
-#' @return A named vector of element counts.
+#' @return A vector of counts named by element.
 #'
 #' @export
 #'
@@ -52,4 +52,5 @@ mz_atomize <- function(mol) {
 
   names(counts) <- elements
   counts
+
 }

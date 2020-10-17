@@ -7,10 +7,10 @@
 mz_calculate(mol, pol = "neutral")
 }
 \arguments{
-\item{mol}{A string containing a molecular formula
-(\emph{e.g.}, "C2H7NO3S"). Structural formulas containing parentheses are
-not acceptable. Charges may be included, but the charge count should follow
-the sign (\emph{e.g.}, "C10H16N5O13P3-3").}
+\item{mol}{A string containing a molecular formula (\emph{e.g.}, "C2H7NO3S").
+Structural formulas containing parentheses are not acceptable. Charges
+may be included, but the charge count should follow the sign (\emph{e.g.},
+"C10H16N5O13P3-3").}
 
 \item{pol}{Type of m/\emph{z} to return. Accepts one of "neutral", which
 returns the monoisotopic mass; "positive", which returns the [M+H]+ mass;
