@@ -1,6 +1,6 @@
 #' Identify LC-MS target isotopes
 #'
-#' \code{mz_iso_target} takes a molecular formula and tracer elements to
+#' \code{mz_iso_target} takes a molecular formula and tracer element(s) to
 #'     determine which molecular isotopes should be measured by LC-MS.
 #'
 #' @inheritParams mz_iso_annotate
@@ -11,14 +11,34 @@
 #'
 #' @return A list containing a tibble of annotated isotope targets and the output
 #'     of `mz_iso_annotate`.
+#'
 #' @export
 #'
 #' @examples
-#' mz_iso_target("C3H4O3")
+#' mz_iso_target("C3H4O3", tracer = c("C", "H"))
 #'
-mz_iso_target <- function(mol, tracer, pol = "negative", ...) {
+mz_iso_target <- function(molecule, tracer = "C", polarity = "negative", ...) {
 
-  l <- mz_iso_annotate(mol, pol)
+  if (polarity %nin% c("neutral", "positive", "negative")) {
+    polarity <- "neutral"
+    warning("Unrecognized polarity, neutral masses assumed.")
+  }
+
+  if (any(tracer %nin% names(iso_info))) {
+    errs <- setdiff(tracer, names(iso_info))
+    stop(stringr::str_c("Unsupported tracer(s) (",
+                        stringr::str_c(errs, collapse = ", "),
+                        ") submitted"))
+  }
+
+  l <- mz_iso_annotate(molecule, polarity)
+
+  if (any(tracer %nin% names(l$elements))) {
+    errs <- setdiff(tracer, names(l$elements))
+    stop(stringr::str_c("Tracer(s) (",
+                        stringr::str_c(errs, collapse = ", "),
+                        ") are not elements in the molecule"))
+  }
 
   iso_list <- l$iso_list
 

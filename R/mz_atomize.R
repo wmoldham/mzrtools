@@ -22,7 +22,7 @@ mz_atomize <- function(molecule) {
   # check arguments
   correct_format <- "^(([A-Z]{1}[a-z]?)[0-9]*)((([A-Z]{1}[a-z]?)|(\\+|\\-))[0-9]*)*$"
   if (!stringr::str_detect(molecule, pattern = correct_format)) {
-    stop("Incorrect format, provide molecular formula (e.g., \"C5H6O5\").")
+    stop("Incorrect format, provide molecular formula (e.g., \"C5H6O5\")")
   }
 
   atom_count <- "(([A-Z]{1}[a-z]?)|(\\+|\\-))[0-9]*"
@@ -34,7 +34,7 @@ mz_atomize <- function(molecule) {
     errs <- elements[elements %nin% names(atomic_mass)]
     stop(stringr::str_c("Unknown element(s) (",
                         stringr::str_c(errs, collapse = ", "),
-                        ") used in supplied formula."))
+                        ") used in supplied formula"))
   }
 
   # check for duplicates
@@ -42,7 +42,7 @@ mz_atomize <- function(molecule) {
     errs <- unique(elements[duplicated(elements)])
     stop(stringr::str_c("Duplicated element(s) (",
                         stringr::str_c(z, collapse = ", "),
-                        ") used in supplied formula."))
+                        ") used in supplied formula"))
   }
 
   counts <-

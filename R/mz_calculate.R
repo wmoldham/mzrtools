@@ -21,7 +21,7 @@
 #'
 mz_calculate <- function(molecule, polarity = "neutral") {
 
-  if (!(polarity %in% c("neutral", "positive", "negative"))) {
+  if (polarity %nin% c("neutral", "positive", "negative")) {
     warning("Unrecognized polarity, neutral mass returned.")
   }
 

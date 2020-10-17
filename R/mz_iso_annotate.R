@@ -2,27 +2,28 @@
 #'
 #' \code{mz_iso_annotate} generates a tibble enumerating all possible isotopes of
 #'     a molecule and annotates this with the mass or m/\emph{z} of each isotope
-#'     based on the polarity (pol) setting and the nominal mass shift of the isotope.
+#'     based on the polarity setting and the nominal mass shift of the isotope.
 #'
 #' @inheritParams mz_atomize
 #' @inheritParams mz_calculate
 #'
-#' @return A list containing a tibble of annotated isotope information, the
-#'     parsed molecular formula, and the isotopes present in the molecule.
+#' @return A named list containing the molecule elements, stable isotopes, scan
+#'     polarity, and a tibble of annotated isotope information.
 #'
 #' @export
 #'
 #' @examples
 #' mz_iso_annotate("C5H8O5")
-#' mz_iso_annotate("C5H8O5", pol = "negative")
+#' mz_iso_annotate("C5H8O5", polarity = "negative")
 #'
-mz_iso_annotate <- function(mol, pol = "negative") {
+mz_iso_annotate <- function(molecule, polarity = "negative") {
 
-  if (!(pol %in% c("neutral", "positive", "negative"))) {
-    warning("Unrecognized polarity, neutral masses returned.")
+  if (polarity %nin% c("neutral", "positive", "negative")) {
+    polarity <- "neutral"
+    warning("Unrecognized polarity, neutral masses assumed")
   }
 
-  elements <- mz_atomize(mol)
+  elements <- mz_atomize(molecule)
   isotopes <- elements[names(elements) %in% names(iso_info)]
 
   # get unlabeled mass
@@ -31,7 +32,7 @@ mz_iso_annotate <- function(mol, pol = "negative") {
     unlabeled_mass <- 0
   } else {
     no_label <- stringr::str_c(names(no_label), no_label, collapse = "")
-    unlabeled_mass <- mz_calculate(no_label, pol = pol)
+    unlabeled_mass <- mz_calculate(no_label, polarity = polarity)
   }
 
   # get isotope information
@@ -43,7 +44,7 @@ mz_iso_annotate <- function(mol, pol = "negative") {
     iso_list %*% out
   }
 
-  iso_list <- mz_iso_list(mol)
+  iso_list <- mz_iso_list(molecule)
   iso_mass <- c(annot("mass", iso_list) + unlabeled_mass)
   iso_shift <- c(annot("shift", iso_list))
 
@@ -55,7 +56,7 @@ mz_iso_annotate <- function(mol, pol = "negative") {
 
   list(elements = elements,
        isotopes = isotopes,
-       polarity = pol,
+       polarity = polarity,
        iso_list = iso_list)
 
 }
