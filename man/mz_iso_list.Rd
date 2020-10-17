@@ -16,7 +16,7 @@ may be included, but the charge count should follow the sign (\emph{e.g.},
 A matrix of isotope combinations
 }
 \description{
-\code{mz_iso_list} generates a matrix enumerating all possible isotopes
+\code{mz_iso_list} generates a matrix enumerating all possible stable isotopes
 of a molecule.
 }
 \examples{

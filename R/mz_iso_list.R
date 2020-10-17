@@ -1,6 +1,6 @@
 #' Generate a matrix of stable isotopes
 #'
-#' \code{mz_iso_list} generates a matrix enumerating all possible isotopes
+#' \code{mz_iso_list} generates a matrix enumerating all possible stable isotopes
 #'     of a molecule.
 #'
 #' @inheritParams mz_atomize
