@@ -2,11 +2,11 @@
 #'
 #' \code{mz_calculate} returns the exact mass of a molecule based on the
 #'     molecular formula or it will return the expected m/\emph{z} based on the
-#'     gain or loss of a proton if provided an argument for scan pol. Other
-#'     adducts should be specifically annotated in the molecular formula.
+#'     gain or loss of a proton if provided an argument for scan polarity.
+#'     Other adducts should be specifically annotated in the molecular formula.
 #'
 #' @inheritParams mz_atomize
-#' @param pol Type of m/\emph{z} to return. Accepts one of "neutral", which
+#' @param polarity Type of m/\emph{z} to return. Accepts one of "neutral", which
 #'     returns the monoisotopic mass; "positive", which returns the \[M+H\]+ mass;
 #'     or "negative", which returns the \[M-H\]- mass.
 #'
@@ -19,17 +19,17 @@
 #' mz_calculate("C2H7NO3S")
 #' mz_calculate("C10H16N5O13P3-3")
 #'
-mz_calculate <- function(mol, pol = "neutral") {
+mz_calculate <- function(molecule, polarity = "neutral") {
 
-  if (!(pol %in% c("neutral", "positive", "negative"))) {
+  if (!(polarity %in% c("neutral", "positive", "negative"))) {
     warning("Unrecognized polarity, neutral mass returned.")
   }
 
-  elements <- unlist(mz_atomize(mol))
+  elements <- unlist(mz_atomize(molecule))
   masses <- atomic_mass[names(elements)]
   total <- sum(masses * elements)
 
-  switch(pol,
+  switch(polarity,
          "neutral" = total,
          "positive" = total + atomic_mass[["proton"]],
          "negative" = total - atomic_mass[["proton"]],

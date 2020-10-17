@@ -1,4 +1,4 @@
-test_that("pol is defined", {
+test_that("polarity is defined", {
   expect_warning(mz_calculate("C2", "fred"))
 })
 

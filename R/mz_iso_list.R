@@ -12,9 +12,9 @@
 #' @examples
 #' mz_iso_list("C5H8O5")
 #'
-mz_iso_list <- function(mol) {
+mz_iso_list <- function(molecule) {
 
-  elements <- mz_atomize(mol)
+  elements <- mz_atomize(molecule)
 
   isotopes <- elements[names(elements) %in% names(iso_info)]
 
