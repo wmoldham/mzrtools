@@ -25,7 +25,7 @@ mz_calculate <- function(molecule, polarity = "neutral") {
     warning("Unrecognized polarity, neutral mass returned.")
   }
 
-  elements <- unlist(mz_atomize(molecule))
+  elements <- unlist(mz_atomize(molecule = molecule))
   masses <- atomic_mass[names(elements)]
   total <- sum(masses * elements)
 

@@ -17,7 +17,6 @@
 #'
 mz_iso_resolve <- function(molecule, tracer = "C", polarity = "negative", ...) {
 
-  # l <- mz_iso_target(molecule = molecule, tracer = tracer, polarity = polarity)
   l <- mz_iso_target(molecule = molecule, tracer = tracer, polarity = polarity, ...)
   iso_list <- l$iso_list
   targets <- l$targets

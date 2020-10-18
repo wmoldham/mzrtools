@@ -20,7 +20,7 @@
 #'
 mz_iso_quant <- function(molecule,
                          polarity = "negative",
-                         tracer,
+                         tracer = "C",
                          purity = NULL,
                          ...) {
 
@@ -34,7 +34,7 @@ mz_iso_quant <- function(molecule,
     }
   }
 
-  l <- mz_iso_resolve(molecule, tracer, polarity)
+  l <- mz_iso_resolve(molecule = molecule, tracer = tracer, polarity = polarity)
   isotopes <- l$isotopes
   elements <- l$elements
 

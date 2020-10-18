@@ -26,7 +26,7 @@ mz_iso_target <- function(molecule, tracer = "C", polarity = "negative", ...) {
                         ") submitted"))
   }
 
-  l <- mz_iso_annotate(molecule, polarity)
+  l <- mz_iso_annotate(molecule = molecule, polarity = polarity)
 
   if (any(tracer %nin% names(l$elements))) {
     errs <- setdiff(tracer, names(l$elements))

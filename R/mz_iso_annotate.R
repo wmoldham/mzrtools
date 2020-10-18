@@ -22,7 +22,7 @@ mz_iso_annotate <- function(molecule, polarity = "negative") {
     stop("Unrecognized polarity")
   }
 
-  elements <- mz_atomize(molecule)
+  elements <- mz_atomize(molecule = molecule)
   isotopes <- elements[names(elements) %in% names(iso_info)]
 
   # get unlabeled mass
@@ -31,7 +31,7 @@ mz_iso_annotate <- function(molecule, polarity = "negative") {
     unlabeled_mass <- 0
   } else {
     no_label <- stringr::str_c(names(no_label), no_label, collapse = "")
-    unlabeled_mass <- mz_calculate(no_label, polarity = polarity)
+    unlabeled_mass <- mz_calculate(molecule = no_label, polarity = polarity)
   }
 
   # get isotope information
