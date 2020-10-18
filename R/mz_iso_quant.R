@@ -38,7 +38,7 @@ mz_iso_quant <- function(molecule,
   isotopes <- l$isotopes
   elements <- l$elements
 
-  mat <- l$resolved[, -c(1:2)]
+  mat <- l$resolved[, -c(1:5)]
 
   molecule_m <- vector(mode = "list", length = length(isotopes))
   names(molecule_m) <- names(isotopes)
@@ -108,7 +108,7 @@ mz_iso_quant <- function(molecule,
     colnames(out) <- apply(combos, 1, paste, collapse = ".")
   }
 
-  prob_matrix <- rowsum(out, group = l$resolved[["mass"]], reorder = FALSE)
+  prob_matrix <- rowsum(out, group = l$resolved[["mass.tar"]], reorder = FALSE)
 
   l[["prob_matrix"]] <- prob_matrix
 

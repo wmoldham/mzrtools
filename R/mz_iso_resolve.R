@@ -28,8 +28,12 @@ mz_iso_resolve <- function(molecule, tracer = "C", polarity = "negative", ...) {
     dplyr::mutate(diff = abs(.data$mass.tar - .data$mass.iso),
                   delta = delta_mz(.data$mass.tar, ...)) %>%
     dplyr::filter(.data$diff <= .data$delta) %>%
-    dplyr::select(-c(.data$mass.iso, .data$diff, .data$delta)) %>%
-    dplyr::rename(mass = .data$mass.tar)
+    dplyr::select(.data$shift,
+                  .data$mass.tar,
+                  .data$mass.iso,
+                  .data$diff,
+                  .data$delta,
+                  dplyr::everything())
 
   l[["resolved"]] <- resolved
 
