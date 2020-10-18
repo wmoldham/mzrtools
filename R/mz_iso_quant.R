@@ -34,7 +34,7 @@ mz_iso_quant <- function(molecule,
     }
   }
 
-  l <- mz_iso_resolve(molecule = molecule, tracer = tracer, polarity = polarity)
+  l <- mz_iso_resolve(molecule = molecule, tracer = tracer, polarity = polarity, ...)
   isotopes <- l$isotopes
   elements <- l$elements
 
@@ -82,6 +82,8 @@ mz_iso_quant <- function(molecule,
       if (length(impossible) != 0) {
         p[impossible] <- 0
       }
+
+      ### TODO: Correct for tracer impurity appropriate ###
 
       # tracer purity
       label_prob <- label_purity ^ t

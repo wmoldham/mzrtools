@@ -5,6 +5,9 @@
 #'     resolved from these targets by the mass spectrometer.
 #'
 #' @inheritParams mz_iso_target
+#' @param ... Passes the arguments nominal_resolution (default 70,000) and
+#'     nominal_mz (default 200) used to determine the delta m/\emph{z} below
+#'     which peaks are considered unresolved.
 #'
 #' @return A list containing a tibble of unresolved isotopes and the output
 #'     of `mz_iso_target`.
@@ -17,7 +20,7 @@
 #'
 mz_iso_resolve <- function(molecule, tracer = "C", polarity = "negative", ...) {
 
-  l <- mz_iso_target(molecule = molecule, tracer = tracer, polarity = polarity, ...)
+  l <- mz_iso_target(molecule = molecule, tracer = tracer, polarity = polarity)
   iso_list <- l$iso_list
   targets <- l$targets
 
