@@ -19,11 +19,6 @@
 #'
 mz_iso_target <- function(molecule, tracer = "C", polarity = "negative", ...) {
 
-  if (polarity %nin% c("neutral", "positive", "negative")) {
-    polarity <- "neutral"
-    warning("Unrecognized polarity, neutral masses assumed.")
-  }
-
   if (any(tracer %nin% names(iso_info))) {
     errs <- setdiff(tracer, names(iso_info))
     stop(stringr::str_c("Unsupported tracer(s) (",

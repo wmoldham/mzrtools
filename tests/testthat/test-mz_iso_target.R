@@ -1,8 +1,4 @@
-test_that("warning works", {
-  expect_warning(mz_iso_annotate("C3", polarity = "x"))
-})
-
-test_that("polarity argument errors work", {
+test_that("tracer argument errors work", {
   expect_error(mz_iso_target("C3", tracer = c("X", "C")))
   expect_error(mz_iso_target("C3", tracer = c("N")))
 })

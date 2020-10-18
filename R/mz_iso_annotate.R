@@ -19,8 +19,7 @@
 mz_iso_annotate <- function(molecule, polarity = "negative") {
 
   if (polarity %nin% c("neutral", "positive", "negative")) {
-    polarity <- "neutral"
-    warning("Unrecognized polarity, neutral masses assumed")
+    stop("Unrecognized polarity")
   }
 
   elements <- mz_atomize(molecule)
@@ -52,7 +51,7 @@ mz_iso_annotate <- function(molecule, polarity = "negative") {
     tibble::as_tibble(iso_list) %>%
     dplyr::bind_cols(mass = iso_mass, shift = iso_shift) %>%
     dplyr::select(.data$shift, .data$mass, dplyr::everything()) %>%
-    dplyr::arrange(mass)
+    dplyr::arrange(.data$mass)
 
   list(elements = elements,
        isotopes = isotopes,

@@ -4,29 +4,29 @@
 \alias{mz_iso_annotate}
 \title{Annotate isotope table}
 \usage{
-mz_iso_annotate(mol, pol = "negative")
+mz_iso_annotate(molecule, polarity = "negative")
 }
 \arguments{
-\item{mol}{A string containing a molecular formula (\emph{e.g.}, "C2H7NO3S").
+\item{molecule}{A string containing a molecular formula (\emph{e.g.}, "C2H7NO3S").
 Structural formulas containing parentheses are not acceptable. Charges
 may be included, but the charge count should follow the sign (\emph{e.g.},
 "C10H16N5O13P3-3").}
 
-\item{pol}{Type of m/\emph{z} to return. Accepts one of "neutral", which
+\item{polarity}{Type of m/\emph{z} to return. Accepts one of "neutral", which
 returns the monoisotopic mass; "positive", which returns the [M+H]+ mass;
 or "negative", which returns the [M-H]- mass.}
 }
 \value{
-A list containing a tibble of annotated isotope information, the
-parsed molecular formula, and the isotopes present in the molecule.
+A named list containing the molecule elements, stable isotopes, scan
+polarity, and a tibble of annotated isotope information.
 }
 \description{
 \code{mz_iso_annotate} generates a tibble enumerating all possible isotopes of
 a molecule and annotates this with the mass or m/\emph{z} of each isotope
-based on the polarity (pol) setting and the nominal mass shift of the isotope.
+based on the polarity setting and the nominal mass shift of the isotope.
 }
 \examples{
 mz_iso_annotate("C5H8O5")
-mz_iso_annotate("C5H8O5", pol = "negative")
+mz_iso_annotate("C5H8O5", polarity = "negative")
 
 }

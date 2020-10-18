@@ -1,5 +1,5 @@
-test_that("warning works", {
-  expect_warning(mz_iso_annotate("C3", polarity = "x"))
+test_that("polarity argument error works", {
+  expect_error(mz_iso_annotate("C3", polarity = "X"))
 })
 
 test_that("output is correct", {

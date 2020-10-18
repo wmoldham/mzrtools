@@ -4,34 +4,39 @@
 \alias{mz_iso_quant}
 \title{Calculate isotope abundances}
 \usage{
-mz_iso_quant(
-  mol,
-  pol = "negative",
-  tracer,
-  purity = list(C = 1, H = 1, O = 1, N = 1, S = 1),
-  ...
-)
+mz_iso_quant(molecule, polarity = "negative", tracer, purity = NULL, ...)
 }
 \arguments{
-\item{isotope_matrix}{Matrix output of \code{mz_iso_tally}.}
+\item{molecule}{A string containing a molecular formula (\emph{e.g.}, "C2H7NO3S").
+Structural formulas containing parentheses are not acceptable. Charges
+may be included, but the charge count should follow the sign (\emph{e.g.},
+"C10H16N5O13P3-3").}
 
-\item{m}{Mass shift from the incorporation of a labed isotope.}
+\item{polarity}{Type of m/\emph{z} to return. Accepts one of "neutral", which
+returns the monoisotopic mass; "positive", which returns the [M+H]+ mass;
+or "negative", which returns the [M-H]- mass.}
 
-\item{lab}{Character vector of labed element.}
+\item{tracer}{A vector of elements labeled by the tracer.}
+
+\item{purity}{A named list defining tracer isotope enrichment purity where, for
+example, \code{C = 0.99} indicates 99\% C13 enrichment for each labeled carbon.
+This argument does not adjust for global tracer dilution, however.}
+
+\item{...}{Passes the arguments nominal_resolution (default 70,000) and
+nominal_mz (default 200) used to determine the delta m/\emph{z} below
+which peaks are considered unresolved.}
 }
 \value{
-Vector of probabilities with length equal to the number of isotopes.
+A list containing a probability matrix of isotope targets and the output
+of \code{mz_iso_annotate}.
 }
 \description{
-\code{mz_iso_quant} will calculate the probability matrix.
+\code{mz_iso_quant} will calculate the probability matrix given a molecular
+formula, scan polarity, and tracer element with its isotopic purity. This
+function identifies and aggregates probabilities for isotopes that are not
+resolved from the labeled isotopes of interest.
 }
 \examples{
-z <- mz_iso_list("C3")
-
-## Calculate the natural abundance.
-mz_iso_calc_probs(z)
-
-## Calculate the natural abundance assuming one labled carbon.
-mz_iso_calc_probs(z, lab = "C", m = 1)
+mz_iso_quant("C3H4O3", tracer = c("C", "H"), purity = list(C = 0.98, H = 1))
 
 }

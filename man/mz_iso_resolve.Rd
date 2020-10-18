@@ -2,19 +2,19 @@
 % Please edit documentation in R/mz_iso_resolve.R
 \name{mz_iso_resolve}
 \alias{mz_iso_resolve}
-\title{Filter unlabeled resolved isotopes}
+\title{Identify isotopes unresolved from targets}
 \usage{
-mz_iso_resolve(mol, tracer, pol = "negative", ...)
+mz_iso_resolve(molecule, tracer = "C", polarity = "negative", ...)
 }
 \arguments{
-\item{mol}{A string containing a molecular formula (\emph{e.g.}, "C2H7NO3S").
+\item{molecule}{A string containing a molecular formula (\emph{e.g.}, "C2H7NO3S").
 Structural formulas containing parentheses are not acceptable. Charges
 may be included, but the charge count should follow the sign (\emph{e.g.},
 "C10H16N5O13P3-3").}
 
 \item{tracer}{A vector of elements labeled by the tracer.}
 
-\item{pol}{Type of m/\emph{z} to return. Accepts one of "neutral", which
+\item{polarity}{Type of m/\emph{z} to return. Accepts one of "neutral", which
 returns the monoisotopic mass; "positive", which returns the [M+H]+ mass;
 or "negative", which returns the [M-H]- mass.}
 
@@ -23,12 +23,12 @@ nominal_mz (default 200) used to determine the delta m/\emph{z} below
 which peaks are considered unresolved.}
 }
 \value{
-A tibble containing the unit mass shift (\code{m}), group, mass or
-m/\emph{z}, and isotope composition.
+A list containing a tibble of unresolved isotopes and the output
+of \code{mz_iso_target}.
 }
 \description{
 \code{mz_iso_resolve} will return the molecular isotopes of interest
-(\emph(e.g.), M0 or label-containing) and those isotopes that cannot be
+(\emph{e.g.}, M0 or label-containing) and those isotopes that cannot be
 resolved from these targets by the mass spectrometer.
 }
 \examples{

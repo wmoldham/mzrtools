@@ -4,10 +4,10 @@
 \alias{mz_atomize}
 \title{Parse a molecular formula into element and count}
 \usage{
-mz_atomize(mol)
+mz_atomize(molecule)
 }
 \arguments{
-\item{mol}{A string containing a molecular formula (\emph{e.g.}, "C2H7NO3S").
+\item{molecule}{A string containing a molecular formula (\emph{e.g.}, "C2H7NO3S").
 Structural formulas containing parentheses are not acceptable. Charges
 may be included, but the charge count should follow the sign (\emph{e.g.},
 "C10H16N5O13P3-3").}

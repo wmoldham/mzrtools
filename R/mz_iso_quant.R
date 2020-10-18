@@ -1,31 +1,40 @@
 #' Calculate isotope abundances
 #'
-#' \code{mz_iso_quant} will calculate the probability matrix.
+#' \code{mz_iso_quant} will calculate the probability matrix given a molecular
+#'     formula, scan polarity, and tracer element with its isotopic purity. This
+#'     function identifies and aggregates probabilities for isotopes that are not
+#'     resolved from the labeled isotopes of interest.
 #'
-#' @param isotope_matrix Matrix output of \code{mz_iso_tally}.
-#' @param m Mass shift from the incorporation of a labed isotope.
-#' @param lab Character vector of labed element.
+#' @inheritParams mz_iso_resolve
+#' @param purity A named list defining tracer isotope enrichment purity where, for
+#'     example, `C = 0.99` indicates 99% C13 enrichment for each labeled carbon.
+#'     This argument does not adjust for global tracer dilution, however.
 #'
-#' @return Vector of probabilities with length equal to the number of isotopes.
+#' @return A list containing a probability matrix of isotope targets and the output
+#'     of `mz_iso_annotate`.
 #'
 #' @export
 #'
 #' @examples
-#' z <- mz_iso_list("C3")
+#' mz_iso_quant("C3H4O3", tracer = c("C", "H"), purity = list(C = 0.98, H = 1))
 #'
-#' ## Calculate the natural abundance.
-#' mz_iso_calc_probs(z)
-#'
-#' ## Calculate the natural abundance assuming one labled carbon.
-#' mz_iso_calc_probs(z, lab = "C", m = 1)
-#'
-mz_iso_quant <- function(mol,
-                         pol = "negative",
+mz_iso_quant <- function(molecule,
+                         polarity = "negative",
                          tracer,
-                         purity = list(C = 1, H = 1, O = 1, N = 1, S = 1),
+                         purity = NULL,
                          ...) {
 
-  l <- mz_iso_resolve(mol, tracer, pol)
+  ### TODO: Check purity arguments similar to tracer arguments ###
+
+  enrich <- list(C = 1, H = 1, O = 1, N = 1, S = 1)
+
+  if (!is.null(purity)) {
+    for (nm in names(purity)) {
+      enrich[[nm]] <- purity[[nm]]
+    }
+  }
+
+  l <- mz_iso_resolve(molecule, tracer, polarity)
   isotopes <- l$isotopes
   elements <- l$elements
 
@@ -42,7 +51,7 @@ mz_iso_quant <- function(mol,
     } else {
       label_no <- 0
     }
-    label_purity <- purity[[nm]]
+    label_purity <- enrich[[nm]]
 
     # get isotope abundances
     probs <- iso_info[[nm]]$abundance

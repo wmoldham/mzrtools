@@ -1,13 +1,13 @@
-#' Filter unlabeled resolved isotopes
+#' Identify isotopes unresolved from targets
 #'
 #' \code{mz_iso_resolve} will return the molecular isotopes of interest
-#'     (\emph(e.g.), M0 or label-containing) and those isotopes that cannot be
+#'     (\emph{e.g.}, M0 or label-containing) and those isotopes that cannot be
 #'     resolved from these targets by the mass spectrometer.
 #'
 #' @inheritParams mz_iso_target
 #'
-#' @return A tibble containing the unit mass shift (`m`), group, mass or
-#'     m/\emph{z}, and isotope composition.
+#' @return A list containing a tibble of unresolved isotopes and the output
+#'     of `mz_iso_target`.
 #'
 #' @export
 #'
@@ -15,10 +15,10 @@
 #' mz_iso_resolve("C5H8O5")
 #' mz_iso_resolve("C5H8O5", tracer = c("C", "H"))
 #'
-mz_iso_resolve <- function(mol, tracer, pol = "negative", ...) {
+mz_iso_resolve <- function(molecule, tracer = "C", polarity = "negative", ...) {
 
-  # l <- mz_iso_target(mol = mol, tracer = tracer, pol = pol)
-  l <- mz_iso_target(mol = mol, tracer = tracer, pol = pol, ...)
+  # l <- mz_iso_target(molecule = molecule, tracer = tracer, polarity = polarity)
+  l <- mz_iso_target(molecule = molecule, tracer = tracer, polarity = polarity, ...)
   iso_list <- l$iso_list
   targets <- l$targets
 

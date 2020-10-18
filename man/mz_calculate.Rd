@@ -4,15 +4,15 @@
 \alias{mz_calculate}
 \title{Calculate the exact mass or m/\emph{z} of a molecule}
 \usage{
-mz_calculate(mol, pol = "neutral")
+mz_calculate(molecule, polarity = "neutral")
 }
 \arguments{
-\item{mol}{A string containing a molecular formula (\emph{e.g.}, "C2H7NO3S").
+\item{molecule}{A string containing a molecular formula (\emph{e.g.}, "C2H7NO3S").
 Structural formulas containing parentheses are not acceptable. Charges
 may be included, but the charge count should follow the sign (\emph{e.g.},
 "C10H16N5O13P3-3").}
 
-\item{pol}{Type of m/\emph{z} to return. Accepts one of "neutral", which
+\item{polarity}{Type of m/\emph{z} to return. Accepts one of "neutral", which
 returns the monoisotopic mass; "positive", which returns the [M+H]+ mass;
 or "negative", which returns the [M-H]- mass.}
 }
@@ -22,8 +22,8 @@ A numeric vector length 1.
 \description{
 \code{mz_calculate} returns the exact mass of a molecule based on the
 molecular formula or it will return the expected m/\emph{z} based on the
-gain or loss of a proton if provided an argument for scan pol. Other
-adducts should be specifically annotated in the molecular formula.
+gain or loss of a proton if provided an argument for scan polarity.
+Other adducts should be specifically annotated in the molecular formula.
 }
 \examples{
 mz_calculate("C5H8O5-")

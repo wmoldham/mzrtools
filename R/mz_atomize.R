@@ -41,7 +41,7 @@ mz_atomize <- function(molecule) {
   if (sum(duplicated(elements)) > 0) {
     errs <- unique(elements[duplicated(elements)])
     stop(stringr::str_c("Duplicated element(s) (",
-                        stringr::str_c(z, collapse = ", "),
+                        stringr::str_c(errs, collapse = ", "),
                         ") used in supplied formula"))
   }
 

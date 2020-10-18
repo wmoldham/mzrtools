@@ -4,10 +4,10 @@
 \alias{mz_iso_list}
 \title{Generate a matrix of stable isotopes}
 \usage{
-mz_iso_list(mol)
+mz_iso_list(molecule)
 }
 \arguments{
-\item{mol}{A string containing a molecular formula (\emph{e.g.}, "C2H7NO3S").
+\item{molecule}{A string containing a molecular formula (\emph{e.g.}, "C2H7NO3S").
 Structural formulas containing parentheses are not acceptable. Charges
 may be included, but the charge count should follow the sign (\emph{e.g.},
 "C10H16N5O13P3-3").}

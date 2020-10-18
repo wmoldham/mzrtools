@@ -4,17 +4,17 @@
 \alias{mz_iso_target}
 \title{Identify LC-MS target isotopes}
 \usage{
-mz_iso_target(mol, tracer, pol = "negative", ...)
+mz_iso_target(molecule, tracer = "C", polarity = "negative", ...)
 }
 \arguments{
-\item{mol}{A string containing a molecular formula (\emph{e.g.}, "C2H7NO3S").
+\item{molecule}{A string containing a molecular formula (\emph{e.g.}, "C2H7NO3S").
 Structural formulas containing parentheses are not acceptable. Charges
 may be included, but the charge count should follow the sign (\emph{e.g.},
 "C10H16N5O13P3-3").}
 
 \item{tracer}{A vector of elements labeled by the tracer.}
 
-\item{pol}{Type of m/\emph{z} to return. Accepts one of "neutral", which
+\item{polarity}{Type of m/\emph{z} to return. Accepts one of "neutral", which
 returns the monoisotopic mass; "positive", which returns the [M+H]+ mass;
 or "negative", which returns the [M-H]- mass.}
 
@@ -27,10 +27,10 @@ A list containing a tibble of annotated isotope targets and the output
 of \code{mz_iso_annotate}.
 }
 \description{
-\code{mz_iso_target} takes a molecular formula and tracer elements to
+\code{mz_iso_target} takes a molecular formula and tracer element(s) to
 determine which molecular isotopes should be measured by LC-MS.
 }
 \examples{
-mz_iso_target("C3H4O3")
+mz_iso_target("C3H4O3", tracer = c("C", "H"))
 
 }

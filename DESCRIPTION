@@ -30,6 +30,7 @@ Imports:
     rlang,
     purrr,
     dplyr,
-    tibble
+    tibble,
+    gtools
 Depends: 
     R (>= 2.10)
