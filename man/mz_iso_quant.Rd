@@ -4,7 +4,7 @@
 \alias{mz_iso_quant}
 \title{Calculate isotope abundances}
 \usage{
-mz_iso_quant(molecule, polarity = "negative", tracer, purity = NULL, ...)
+mz_iso_quant(molecule, polarity = "negative", tracer = "C", purity = NULL, ...)
 }
 \arguments{
 \item{molecule}{A string containing a molecular formula (\emph{e.g.}, "C2H7NO3S").
