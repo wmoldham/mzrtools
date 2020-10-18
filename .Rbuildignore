@@ -1,3 +1,5 @@
+^renv$
+^renv\.lock$
 ^mzrtools\.dev\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
