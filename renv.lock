@@ -212,10 +212,15 @@
     },
     "gert": {
       "Package": "gert",
-      "Version": "0.3",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "cc96352be1b6360a68fa587d5ef91708"
+      "Version": "1.0.2",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "r-lib",
+      "RemoteRepo": "gert",
+      "RemoteRef": "master",
+      "RemoteSha": "69be66c86ec7c9bea5e907a72a28b90c976f4e21",
+      "Hash": "97947ac54187fb300b4fb47782721791"
     },
     "gh": {
       "Package": "gh",
@@ -426,7 +431,9 @@
     "renv": {
       "Package": "renv",
       "Version": "0.12.0",
-      "Source": "Repository"
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "7340c71f46a0fd16506cfa804e224e44"
     },
     "rlang": {
       "Package": "rlang",
@@ -611,6 +618,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "2826c5d9efb0a88f657c7a679c7106db"
+    },
+    "zip": {
+      "Package": "zip",
+      "Version": "2.1.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "3bc8405c637d988801ec5ea88372d0c2"
     }
   }
 }

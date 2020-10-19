@@ -4,7 +4,7 @@
 \alias{mz_iso_target}
 \title{Identify LC-MS target isotopes}
 \usage{
-mz_iso_target(molecule, tracer = "C", polarity = "negative", ...)
+mz_iso_target(molecule, tracer = "C", polarity = "negative")
 }
 \arguments{
 \item{molecule}{A string containing a molecular formula (\emph{e.g.}, "C2H7NO3S").
@@ -17,10 +17,6 @@ may be included, but the charge count should follow the sign (\emph{e.g.},
 \item{polarity}{Type of m/\emph{z} to return. Accepts one of "neutral", which
 returns the monoisotopic mass; "positive", which returns the [M+H]+ mass;
 or "negative", which returns the [M-H]- mass.}
-
-\item{...}{Passes the arguments nominal_resolution (default 70,000) and
-nominal_mz (default 200) used to determine the delta m/\emph{z} below
-which peaks are considered unresolved.}
 }
 \value{
 A list containing a tibble of annotated isotope targets and the output

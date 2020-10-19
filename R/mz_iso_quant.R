@@ -34,7 +34,7 @@ mz_iso_quant <- function(molecule,
     }
   }
 
-  l <- mz_iso_resolve(molecule = molecule, tracer = tracer, polarity = polarity, ...)
+  l <- mz_iso_resolve(molecule = molecule, tracer = tracer, polarity = polarity)#, ...)
   isotopes <- l$isotopes
   elements <- l$elements
 
@@ -77,18 +77,27 @@ mz_iso_quant <- function(molecule,
       abundance <- matrix(rep(probs, length(total)), nrow = length(total), byrow = TRUE)
       p <- ratio * apply(abundance ^ m, 1, prod)
 
-      # change probabilities of impossible combinations to 0
+      # adjust for tracer purity
       impossible <- which(is.nan(ratio))
       if (length(impossible) != 0) {
-        p[impossible] <- 0
+        if (label_purity == 1) {
+          # change probabilities of impossible combinations to 0
+          p[impossible] <- 0
+        } else {
+          p[impossible] <- 1
+          t_exp <- apply(mat[, iso_info[[nm]]$label], 1, min, t)
+
+          conv <- 1
+          for (i in 1:t) {
+            conv <- stats::convolve(conv, rev(c(1 - label_purity, label_purity)), type = "open")
+          }
+          pur_c <- conv[t_exp + 1]
+          p <- p * pur_c
+        }
+
       }
 
-      ### TODO: Correct for tracer impurity appropriate ###
-
-      # tracer purity
-      label_prob <- label_purity ^ t
-
-      element_m[[t + 1]] <- p * label_prob
+      element_m[[t + 1]] <- p
 
     }
 
