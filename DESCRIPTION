@@ -32,6 +32,8 @@ Imports:
     dplyr,
     tibble,
     gtools,
-    stats
+    stats,
+    pracma,
+    quadprog
 Depends: 
     R (>= 2.10)
