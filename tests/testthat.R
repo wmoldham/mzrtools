@@ -1,4 +1,4 @@
 library(testthat)
-library(mzrtools.dev)
+library(mzrtools)
 
-test_check("mzrtools.dev")
+test_check("mzrtools")

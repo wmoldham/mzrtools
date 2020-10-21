@@ -1,6 +1,6 @@
-Package: mzrtools.dev
+Package: mzrtools
 Title: Make Molecular Formulas Useful for Mass Spectrometry Applications
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: 
     person(given = "William",
            family = "Oldham",
@@ -18,8 +18,8 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9000
-URL: https://github.com/wmoldham/mzrtools.dev
-BugReports: https://github.com/wmoldham/mzrtools.dev/issues
+URL: https://github.com/wmoldham/mzrtools
+BugReports: https://github.com/wmoldham/mzrtools/issues
 Suggests: 
     spelling,
     testthat

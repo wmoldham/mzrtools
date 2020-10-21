@@ -13,12 +13,12 @@ knitr::opts_chunk$set(
 )
 ```
 
-# mzrtools.dev
+# mzrtools
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of mzrtools.dev is to ...
+The goal of mzrtools is to ...
 
 ## Overview
 
