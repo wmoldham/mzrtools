@@ -121,6 +121,11 @@ mz_iso_quant <- function(molecule,
 
   prob_matrix <- rowsum(out, group = l$resolved[["mass.tar"]], reorder = FALSE)
 
+  # calculate mass distribution vector from these columns
+  if (!all(colSums(prob_matrix) == 1)) {
+    prob_matrix <- sweep(prob_matrix, 2, colSums(prob_matrix), `/`)
+  }
+
   l[["prob_matrix"]] <- prob_matrix
 
   l
