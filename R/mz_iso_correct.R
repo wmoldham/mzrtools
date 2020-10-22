@@ -27,6 +27,6 @@ mz_iso_correct <- function(prob_matrix, v) {
     stop("Incompatible dimensions")
   }
 
-  pracma::lsqlincon(C = prob_matrix, d = v, lb = 0)
+  pracma::lsqlincon(C = prob_matrix, d = v, lb = 0, ub = 1)
 
 }
